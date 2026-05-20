@@ -1,0 +1,79 @@
+:root {
+  --bg: #0a0a0f;
+  --bg-alt: #12121a;
+  --fg: #e2e8f0;
+  --purple: #a78bfa;
+  --violet: #7c3aed;
+  --green: #6ee7b7;
+  --cyan: #67e8f9;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Fira Code", monospace;
+  background-color: var(--bg);
+  color: var(--fg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1rem;
+  line-height: 1.6;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: var(--purple);
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  color: var(--violet);
+}
+
+a {
+  color: var(--cyan);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  max-width: 700px;
+  width: 100%;
+  padding: 2rem;
+  background: var(--bg-alt);
+  border-radius: 12px;
+  box-shadow: 0 0 10px #00000044;
+}
+
+code {
+  background: #1a1a2e;
+  padding: 0.2rem 0.4rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  color: var(--green);
+}
+
+.button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: var(--violet);
+  color: var(--fg);
+  border-radius: 8px;
+  margin-top: 1.5rem;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.button:hover {
+  background: var(--purple);
+}
+
+footer {
+  margin-top: 4rem;
+  font-size: 0.9rem;
+  color: #4a4a6a;
+}
