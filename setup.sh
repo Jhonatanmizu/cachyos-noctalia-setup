@@ -154,23 +154,8 @@ else
   warning "stow-dotfiles.sh not found, skipping dotfiles setup"
 fi
 
-# === Ulauncher Installation ===
-info "10. Installing Ulauncher..."
-if ! is_package_installed ulauncher; then
-  install_aur_packages ulauncher || {
-    warning "Failed to install Ulauncher (may not exist in AUR)"
-  }
-fi
-
-mkdir -p ~/.config/autostart
-if [ -f "/usr/share/applications/ulauncher.desktop" ]; then
-  cp /usr/share/applications/ulauncher.desktop ~/.config/autostart/ || {
-    warning "Failed to copy Ulauncher autostart file"
-  }
-fi
-
 # === Starship Prompt ===
-info "11. Installing Starship shell prompt..."
+info "10. Installing Starship shell prompt..."
 if ! command -v starship &> /dev/null; then
   curl -fsS https://starship.rs/install.sh | sh -s -- -y || {
     warning "Failed to install Starship via curl, trying pacman..."
@@ -180,7 +165,7 @@ fi
 
 # === Themes (Noctalia) ===
 if [ -f "$(dirname "$0")/scripts/themes.sh" ]; then
-  info "12. Installing Noctalia Theme..."
+  info "11. Installing Noctalia Theme..."
   bash "$(dirname "$0")/scripts/themes.sh" || {
     warning "Failed to install themes"
   }
@@ -190,7 +175,7 @@ fi
 
 # === Fonts ===
 if [ -f "$(dirname "$0")/scripts/fonts.sh" ]; then
-  info "13. Installing Fonts..."
+  info "12. Installing Fonts..."
   bash "$(dirname "$0")/scripts/fonts.sh" || {
     warning "Failed to install fonts"
   }

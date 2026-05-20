@@ -47,7 +47,7 @@ if [ -d ".git" ]; then
   fi
 fi
 
-MODULES=("fish" "git" "nvim" "alacritty" "mise" "starship" "ulauncher")
+MODULES=("fish" "git" "nvim" "alacritty" "mise" "starship")
 stowed_modules=()
 skipped_modules=()
 

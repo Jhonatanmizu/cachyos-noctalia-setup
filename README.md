@@ -58,7 +58,7 @@ ready-to-code system in minutes.
 Dotfiles are managed using [GNU Stow](https://www.gnu.org/software/stow/) for
 clean and modular configuration. Current modules include:
 
-- `fish`, `git`, `nvim`, `alacritty`, `mise`, `starship`, `ulauncher`
+- `fish`, `git`, `nvim`, `alacritty`, `mise`, `starship`
 
 You can easily add or remove modules from your dotfiles repo.
 
