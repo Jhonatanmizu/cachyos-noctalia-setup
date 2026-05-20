@@ -25,7 +25,7 @@ fi
 # === 0. Ensure user theme extension is installed ===
 info "Checking for User Themes GNOME extension..."
 if ! is_package_installed gnome-shell-extension-user-theme; then
-  info "Installing gnome-shell-extension-user-theme..."
+  info "Installing gnome-shell-extension-user-theme..."`
   install_packages gnome-shell-extension-user-theme
 else
   success "User Themes extension already installed"

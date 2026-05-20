@@ -7,7 +7,7 @@ source "$SCRIPT_DIR/utils.sh"
 
 echo -e "${PURPLE}🌙 CachyOS Noctalia Setup Started${NC}"
 
-REQUIRED_CMDS=(sudo git curl wget zsh gsettings)
+REQUIRED_CMDS=(sudo git curl wget fish)
 for cmd in "${REQUIRED_CMDS[@]}"; do
   check_command "$cmd" || exit 1
 done
@@ -49,9 +49,6 @@ BASIC_PKGS=(
   gcc
   make
   fastfetch
-  zsh
-  zsh-syntax-highlighting
-  zsh-autosuggestions
   neovim
   bat
 )
@@ -73,8 +70,6 @@ fi
 
 GUI_PKGS=(
   xournalpp
-  gnome-tweaks
-  gnome-extensions-app
   gimp
   krita
   inkscape
@@ -102,24 +97,8 @@ for app in "${FLATPAK_APPS[@]}"; do
   fi
 done
 
-# === ZSH Setup ===
-info "4. Setting ZSH as default shell..."
-ZSH_PATH=$(which zsh)
-if [ -z "$ZSH_PATH" ]; then
-  error "ZSH not found in PATH"
-  exit 1
-fi
-
-if [[ "$SHELL" != "$ZSH_PATH" ]]; then
-  chsh -s "$ZSH_PATH" || {
-    error "Failed to change default shell to ZSH"
-    exit 1
-  }
-  info "Default shell changed to ZSH. Restart your terminal to apply."
-fi
-
 # === Mise Version Manager ===
-info "5. Installing Mise Version Manager..."
+info "4. Installing Mise Version Manager..."
 if ! command -v mise &> /dev/null; then
   curl -fsSL https://mise.run | sh || {
     error "Failed to install Mise"
@@ -129,7 +108,7 @@ if ! command -v mise &> /dev/null; then
 fi
 
 # === Docker Setup ===
-info "6. Installing Docker & Docker Compose..."
+info "5. Installing Docker & Docker Compose..."
 install_packages docker docker-compose
 
 sudo systemctl enable --now docker || {
@@ -142,7 +121,7 @@ sudo usermod -aG docker "$USER" && {
 }
 
 # === VSCode Installation ===
-info "7. Installing VSCode..."
+info "6. Installing VSCode..."
 if ! is_package_installed code; then
   install_aur_packages visual-studio-code-bin || {
     error "Failed to install VSCode via AUR"
@@ -151,17 +130,17 @@ if ! is_package_installed code; then
 fi
 
 # === Alacritty Installation ===
-info "8. Installing Alacritty Terminal..."
+info "7. Installing Alacritty Terminal..."
 install_packages alacritty
 
 # === Create Default Folders ===
-info "9. Creating default folders..."
+info "8. Creating default folders..."
 mkdir -p ~/Developer ~/Wallpapers || {
   warning "Failed to create default folders"
 }
 
 # === Dotfiles Setup ===
-info "10. Loading dotfiles..."
+info "9. Loading dotfiles..."
 if ! is_package_installed stow; then
   install_packages stow
 fi
@@ -176,7 +155,7 @@ else
 fi
 
 # === Ulauncher Installation ===
-info "11. Installing Ulauncher..."
+info "10. Installing Ulauncher..."
 if ! is_package_installed ulauncher; then
   install_aur_packages ulauncher || {
     warning "Failed to install Ulauncher (may not exist in AUR)"
@@ -191,7 +170,7 @@ if [ -f "/usr/share/applications/ulauncher.desktop" ]; then
 fi
 
 # === Starship Prompt ===
-info "12. Installing Starship shell prompt..."
+info "11. Installing Starship shell prompt..."
 if ! command -v starship &> /dev/null; then
   curl -fsS https://starship.rs/install.sh | sh -s -- -y || {
     warning "Failed to install Starship via curl, trying pacman..."
@@ -199,29 +178,9 @@ if ! command -v starship &> /dev/null; then
   }
 fi
 
-# === GNOME Extensions ===
-if [ -f "$(dirname "$0")/scripts/shell-extensions.sh" ]; then
-  info "13. Installing GNOME Extensions..."
-  bash "$(dirname "$0")/scripts/shell-extensions.sh" || {
-    warning "Failed to install GNOME extensions"
-  }
-else
-  warning "shell-extensions.sh not found, skipping GNOME extensions setup"
-fi
-
-# === GNOME Shortcuts ===
-if [ -f "$(dirname "$0")/scripts/gnome-shortcuts.sh" ]; then
-  info "14. Setting GNOME Shortcuts..."
-  bash "$(dirname "$0")/scripts/gnome-shortcuts.sh" || {
-    warning "Failed to set GNOME shortcuts"
-  }
-else
-  warning "gnome-shortcuts.sh not found, skipping GNOME shortcuts setup"
-fi
-
 # === Themes (Noctalia) ===
 if [ -f "$(dirname "$0")/scripts/themes.sh" ]; then
-  info "15. Installing Noctalia Theme..."
+  info "12. Installing Noctalia Theme..."
   bash "$(dirname "$0")/scripts/themes.sh" || {
     warning "Failed to install themes"
   }
@@ -231,7 +190,7 @@ fi
 
 # === Fonts ===
 if [ -f "$(dirname "$0")/scripts/fonts.sh" ]; then
-  info "16. Installing Fonts..."
+  info "13. Installing Fonts..."
   bash "$(dirname "$0")/scripts/fonts.sh" || {
     warning "Failed to install fonts"
   }
@@ -241,5 +200,5 @@ fi
 
 # === Final Message ===
 success "✅ CachyOS Noctalia setup complete!"
-info "ℹ️ Please restart your terminal or run 'exec zsh' to activate your new environment."
+info "ℹ️ Please restart your terminal or run 'exec fish' to activate your new environment."
 info "ℹ️ For Docker permissions, you may need to log out and back in."

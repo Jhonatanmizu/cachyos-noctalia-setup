@@ -21,7 +21,7 @@ ready-to-code system in minutes.
 - 📦 Install essential packages and development tools (pacman + AUR)
 - 🧰 Set up Flatpak and configure the Flathub remote
 - 🛠️ Apply dotfiles using GNU `stow` (modular config management)
-- 🖥️ Configure GNOME with preferred tweaks, extensions, and keybindings
+- 🪟 Configure Niri compositor with Noctalia styling
 - 🌙 **Noctalia** dark theme (Catppuccin Mocha GTK + Tela icons)
 - 🧼 Clean, minimal, and fully modular – each setup task is in its own script
 
@@ -39,12 +39,10 @@ ready-to-code system in minutes.
 - `mise` – Version manager
 - `starship` – Prompt customizer
 
-### 🖼️ GNOME Tweaks & Extensions
+### 🖼️ Noctalia Theme
 
-- `gnome-tweaks`, `gnome-extensions-app`
-- Extensions like Dash to Dock, Blur My Shell, Just Perfection, and more
-- Custom GNOME keyboard shortcuts
 - **Noctalia theme**: Catppuccin Mocha (GTK) + Tela Dark (icons)
+- Applied via GTK settings.ini (works with Niri or any Wayland compositor)
 
 ### 📁 Utilities & GUI Tools
 
@@ -60,7 +58,7 @@ ready-to-code system in minutes.
 Dotfiles are managed using [GNU Stow](https://www.gnu.org/software/stow/) for
 clean and modular configuration. Current modules include:
 
-- `zsh`, `git`, `nvim`, `alacritty`, `mise`, `starship`, `ulauncher`
+- `fish`, `git`, `nvim`, `alacritty`, `mise`, `starship`, `ulauncher`
 
 You can easily add or remove modules from your dotfiles repo.
 
@@ -82,14 +80,14 @@ chmod +x setup.sh
 ./setup.sh
 ```
 
-☑️ This will install packages, set up GNOME, apply the Noctalia theme, load dotfiles, and more.
+☑️ This will install packages, apply the Noctalia theme, load dotfiles, and more.
 
 ## 🗃️ Repository Structure
 
 ```bash
 cachyos-noctalia-setup/
 ├── dotfiles/             # Dotfiles to be stowed
-├── scripts/              # Sub-scripts for fonts, themes, GNOME setup
+├── scripts/              # Sub-scripts for fonts, theme installation
 ├── setup.sh              # Main setup entry point
 ├── stow-dotfiles.sh      # Dotfile manager using GNU Stow
 └── README.md
@@ -100,13 +98,12 @@ cachyos-noctalia-setup/
 - ✅ CachyOS Linux (Arch-based)
 - ✅ Internet connection
 - ✅ sudo privileges
-- ✅ GNOME desktop environment (for GNOME-specific tweaks)
+- ✅ Niri compositor (or any Wayland compositor)
 
 ## 📝 Notes
 
 - Flatpak is preferred over Snap. This setup avoids using Snap entirely.
-- GNOME is assumed as the desktop environment.
-- Some GNOME extensions may require manual enabling via the Extensions app.
+- Niri is the target compositor, but scripts work on any Wayland setup.
 - AUR helper (yay) is automatically installed if not present.
 
 ## 🤝 Contributing
